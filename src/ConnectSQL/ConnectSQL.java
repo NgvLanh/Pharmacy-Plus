@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
 
@@ -21,6 +20,7 @@ public class ConnectSQL {
     public static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=Pharmacy;encrypt=true;trustServerCertificate=true;";
     public static String username = "sa";
     public static String password = "lanhpc06581";
+    
     static {
         try {
             Class.forName(driver);

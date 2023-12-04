@@ -31,7 +31,6 @@ public class Login_Panel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
         jLabelSignIn = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
@@ -82,18 +81,6 @@ public class Login_Panel extends javax.swing.JPanel {
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 2, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 255));
-        jButton2.setText("Tôi chưa có tài khoản...");
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setOpaque(true);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
         jLabelSignIn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelSignIn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSignIn.setText("Đăng Nhập");
@@ -140,7 +127,6 @@ public class Login_Panel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtUsername)
                                 .addComponent(txtPassword)
                                 .addComponent(jLabelSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,17 +151,9 @@ public class Login_Panel extends javax.swing.JPanel {
                 .addComponent(jCheckBox1)
                 .addGap(25, 25, 25)
                 .addComponent(jLabelSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if (actionListenerToRegister != null) {
-            actionListenerToRegister.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
-        }
-    }//GEN-LAST:event_jButton2MouseClicked
 
     private void jLabelSignInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSignInMouseClicked
         login();
@@ -191,7 +169,6 @@ public class Login_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;

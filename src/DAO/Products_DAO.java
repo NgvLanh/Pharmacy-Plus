@@ -1,4 +1,3 @@
-
 package DAO;
 
 import Classes.Products;
@@ -9,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Asus
+
+ @author Asus
  */
 public class Products_DAO extends System_DAO<Products, String> {
 
@@ -19,7 +18,6 @@ public class Products_DAO extends System_DAO<Products, String> {
     final String DELETE_SQL = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM PRODUCTS";
     final String SELECT_BY_ID_SQL = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?";
-    
 
     @Override
     public void insert(Products entity) {
@@ -88,9 +86,35 @@ public class Products_DAO extends System_DAO<Products, String> {
             return null;
         }
     }
-    
+
     public List<Products> selectByKeyword(String keyword) {
-        String SQL = "SELECT * FROM PRODUCTS WHERE PRODUCT_NAME LIKE ?";
+        String SQL = "SELECT * FROM PRODUCTS WHERE PRODUCT_NAME LIKE ? "
+                + "     AND Product_Id not in ( "
+                + "	select Product_Id "
+                + "	from Cart "
+                + ") ";
         return this.selectbySql(SQL, "%" + keyword + "%");
+    }
+
+    public void insertTempTable(Products entity) {
+        String SQL = "INSERT INTO CART VALUES (?, ?, ?, ?, ?, ?, ?)";
+        ConnectSQL.update(SQL,
+                entity.getIDPro(),
+                entity.getNamePro(),
+                entity.getPrice(),
+                entity.getImage(),
+                entity.getDetails(),
+                entity.getSupplier(),
+                entity.getIDEmpl()
+        );
+    }
+
+    public List<Products> selectTheOtherProduct() {
+            String SQL = "select * from Products "
+                    + "where Product_Id not in ( "
+                    + "	select Product_Id "
+                    + "	from Cart "
+                    + ")";
+        return selectbySql(SQL);
     }
 }

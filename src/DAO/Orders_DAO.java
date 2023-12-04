@@ -11,18 +11,17 @@ import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
 
  @author Lành
  */
 public class Orders_DAO extends System_DAO<Orders, String> {
-    
+
     final String INSERT_SQL = "INSERT INTO ORDERS VALUES (?,?,?,?)";
 //    final String UPDATE_SQL = "UPDATE ORDERS SET CUSTOMER_NAME = ?,CUSTOMER_YEARBIRTH = ?,EMPLOYEE_ID =? WHERE CUSTOMER_PHONENUMBER = ?";
     final String DELETE_SQL = "DELETE FROM ORDERS WHERE PRODUCT_ID = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM ORDERS ORDER BY ID DESC";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM ORDERS WHERE ID = ?";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM ORDERS WHERE CUSTOMER_ID LIKE ?";
 
     @Override
     public void insert(Orders entity) {
@@ -50,7 +49,7 @@ public class Orders_DAO extends System_DAO<Orders, String> {
 
     @Override
     public Orders selectbyID(String id) {
-        return this.selectbySql(SELECT_BY_ID_SQL, id).get(0);
+        return this.selectbySql("SELECT * FROM ORDERS WHERE ID = ?", id).get(0);
     }
 
     @Override
@@ -72,13 +71,13 @@ public class Orders_DAO extends System_DAO<Orders, String> {
             return null;
         }
     }
-    
+
     // Extra
-    public Orders selectbyCusId(int id) {
-        String SQL = "SELECT * FROM ORDERS WHERE CUSTOMER_ID = ?";
-        return this.selectbySql(SQL, id).get(0);
+    public List<Orders> selectbyCusId(int id) {
+        String SQL = "SELECT * FROM ORDERS WHERE CUSTOMER_ID = ? ORDER BY CUSTOMER_ID DESC";
+        return this.selectbySql(SQL, id);
     }
-    
+
     public List<Integer> selectMonth() {
         String sql = "SELECT DISTINCT MONTH(DATE) FROM ORDERS ORDER BY MONTH(DATE) DESC";
         List<Integer> list = new ArrayList<>();
@@ -92,6 +91,15 @@ public class Orders_DAO extends System_DAO<Orders, String> {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
+        }
+    }
+
+    public List<Orders> selectbyIdOrderCustomer(String id) {
+        List<Orders> list = selectbySql(SELECT_BY_ID_SQL, "%" + id + "%");
+        if (!list.isEmpty()) {
+            return list;
+        } else {
+            return null;
         }
     }
 }

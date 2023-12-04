@@ -464,10 +464,10 @@ public class Employee_Panel extends javax.swing.JPanel {
         String password = new String(txtPassword.getPassword()).trim();
 
         if (userName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên người dùng");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã nhân viên");
             return false;
-        } else if (!userName.matches("^NV\\d{3}$")) {
-            JOptionPane.showMessageDialog(this, "Mã đăng nhập nên có định dang như (NVxxx)");
+        } else if (!userName.matches("^(NV|nv)\\d{3}$")) {
+            JOptionPane.showMessageDialog(this, "Mã đăng nhập nên có định dang như (NVxxx or nvxxx)");
             return false;
         }
 
@@ -516,7 +516,7 @@ public class Employee_Panel extends javax.swing.JPanel {
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu");
             return false;
-        } else if (!password.matches("^[A-Za-z\\d@$!%*?&]{8,}$")) {
+        } else if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không đủ mạnh (Chữ hoa, thường, kí tự, số, dài 8+)");
             return false;
         }
@@ -650,7 +650,7 @@ public class Employee_Panel extends javax.swing.JPanel {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng cần xoá ở danh sách");
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập hoặc chọn nhân viên cần xoá ở danh sách");
                 jTabbedPane1.setSelectedIndex(1);
             }
         } else {

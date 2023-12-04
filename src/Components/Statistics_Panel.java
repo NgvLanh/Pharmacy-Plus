@@ -1,22 +1,28 @@
-
 package Components;
 
+import Classes.Products;
 import DAO.Orders_DAO;
+import DAO.Products_DAO;
 import DAO.Statistics_DAO;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Phúc (design) 
+
+ @author Phúc (design)
  */
 public class Statistics_Panel extends javax.swing.JPanel {
-    
+
     Statistics_DAO statistics_DAO = new Statistics_DAO();
     Orders_DAO orders_DAO = new Orders_DAO();
-    
+
     public Statistics_Panel() {
         initComponents();
         fillTableStatistics();
@@ -71,12 +77,19 @@ public class Statistics_Panel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hoá đơn", "Tên sản phẩm", "Giá sản phẩm", "Số lượng", "Mã sản phẩm", "Mã nhân viên", "Tên nhân viên"
+                "Mã hoá đơn", "Tên sản phẩm", "Giá sản phẩm", "Số lượng", "Mã sản phẩm", "Mã nhân viên", "Mã khách hàng"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -139,6 +152,11 @@ public class Statistics_Panel extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Xem biểu đồ");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,6 +215,10 @@ public class Statistics_Panel extends javax.swing.JPanel {
         fillTableByMonth();
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        showDetailsRevenue();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -210,7 +232,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblRevenue;
     // End of variables declaration//GEN-END:variables
-    
+
 //    Lanh
     private void fillTableStatistics() {
         DefaultTableModel tableModel = (DefaultTableModel) tblRevenue.getModel();
@@ -219,8 +241,8 @@ public class Statistics_Panel extends javax.swing.JPanel {
         for (Object[] objects : list) {
             tableModel.addRow(objects);
         }
-    } 
-    
+    }
+
     private void fillCombobox() {
         DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) jComboBox1.getModel();
         comboBoxModel.removeAllElements();
@@ -229,8 +251,8 @@ public class Statistics_Panel extends javax.swing.JPanel {
             comboBoxModel.addElement("Tháng " + z);
         }
     }
-    
-    private void fillTableByMonth() {
+
+    public void fillTableByMonth() {
         DefaultTableModel tableModel = (DefaultTableModel) tblRevenue.getModel();
         tableModel.setRowCount(0);
         String monthString = jComboBox1.getSelectedItem().toString();
@@ -240,5 +262,26 @@ public class Statistics_Panel extends javax.swing.JPanel {
         for (Object[] objects : list) {
             tableModel.addRow(objects);
         }
+    }
+
+    private void showDetailsRevenue() {
+        List<Object[]> list = statistics_DAO.getRevenueChart();
+        List<Integer> months = new ArrayList<>();
+        List<Double> revenue = new ArrayList<>();
+        for (Object[] object : list) {
+            months.add((Integer) object[1]);
+            revenue.add((Double) object[2]);
+        }
+
+        DoubleBarChart chart = new DoubleBarChart();
+        chart.setSize(800, 400);
+        chart.novemberRevenue = revenue.get(0);
+        chart.decemberRevenue = revenue.get(1);
+
+        chart.updateChart(chart.novemberRevenue, chart.decemberRevenue);
+
+        chart.setLocationRelativeTo(null);
+        chart.dispose();
+        chart.setVisible(true);
     }
 }

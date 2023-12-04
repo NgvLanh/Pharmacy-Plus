@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -540,7 +541,6 @@ public class Products_Panel extends javax.swing.JPanel {
     private boolean validateData() {
         String productName = txtNamePro.getText().trim();
         String priceString = txtPrice.getText().trim();
-        String details = txtDetails.getText().trim();
         String supplierId = txtSupplierID.getText().trim();
 
         if (productName.isEmpty()) {
@@ -548,6 +548,9 @@ public class Products_Panel extends javax.swing.JPanel {
             return false;
         } else if (!productName.matches("^[\\p{L} \\d]+$")) {
             JOptionPane.showMessageDialog(this, "Tên sản phẩm không đúng định dạng");
+            return false;
+        } else if (productName.length() > 50) {
+            JOptionPane.showMessageDialog(this, "Tên sản phẩm không quá 50 ký tự");
             return false;
         }
 
@@ -565,11 +568,6 @@ public class Products_Panel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Giá sản phẩm không hợp lệ");
                 return false;
             }
-        }
-
-        if (details.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập chi tiết");
-            return false;
         }
 
         if (supplierId.isEmpty()) {
@@ -613,7 +611,9 @@ public class Products_Panel extends javax.swing.JPanel {
         product.setSupplier(supplierId);;
         product.setIDEmpl(empId);
         product.setImage(imageName);
-        product.setIDPro(Integer.parseInt(productId));
+        if (!productId.isEmpty()) {
+            product.setIDPro(Integer.parseInt(productId));
+        }
         return product;
     }
 
@@ -649,6 +649,7 @@ public class Products_Panel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Mã sản phẩm đã tồn tại");
                 }
             } catch (RuntimeException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại");
             }
         }
@@ -678,7 +679,7 @@ public class Products_Panel extends javax.swing.JPanel {
     private void delete() {
         String productID = txtProID.getText().trim();
         if (!productID.isEmpty()) {
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá sản phẩm này!","Xác nhận",  JOptionPane.YES_NO_OPTION);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá sản phẩm này!", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (option == JOptionPane.YES_OPTION) {
                 Products product = products_DAO.selectbyID(productID);
                 if (product != null) {

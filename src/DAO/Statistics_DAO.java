@@ -36,14 +36,21 @@ public class Statistics_DAO {
     // 1 thống kê doanh thu 
     public List<Object[]> getRevenue() {
         String sql = "{CALL sp_Revenue}";
-        String[] columns = {"id", "Product_name", "Total_price", "Quality", "Product_id", "Employee_id", "Employee_name"};
+        String[] columns = {"id", "Product_name", "Total_price", "Quantity", "Product_id", "Employee_id", "Customer_id"};
         return this.getListOfArray(sql, columns);
     }
     // 2 Thống kê doanh thu theo tháng chỉ định
     public List<Object[]> getRevenueByMonth(Integer month) {
         String sql = "{CALL sp_Revenue_by_month (?)}";
-        String[] columns = {"id", "Product_name", "Total_price", "Quality", "Product_id", "Employee_id", "Employee_name"};
+        String[] columns = {"id", "Product_name", "Total_price", "Quantity", "Product_id", "Employee_id", "Customer_id"};
         return this.getListOfArray(sql, columns, month);
+    }
+    
+    // 2 Thống kê doanh thu theo tháng chỉ định
+    public List<Object[]> getRevenueChart() {
+        String sql = "{CALL sp_Revenue_Chart}";
+        String[] columns = {"OrderYear", "OrderMonth", "MonthlyRevenue"};
+        return this.getListOfArray(sql, columns);
     }
     
 }

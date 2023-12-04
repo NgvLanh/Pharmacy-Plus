@@ -1,4 +1,3 @@
-
 package DAO;
 
 import Classes.Customers;
@@ -18,7 +17,7 @@ public class Customers_DAO extends System_DAO<Customers, String> {
     final String DELETE_SQL = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM CUSTOMERS";
     final String SELECT_BY_ID_SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = ?";
-    final String SELECT_BY_PHONENUMBER_OR_SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_PHONENUMBER = ? OR CUSTOMER_NAME LIKE ?";
+    final String SELECT_BY_PHONENUMBER_OR_NAME_SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_PHONENUMBER = ? OR CUSTOMER_NAME LIKE ?";
     final String SELECT_BY_PHONENUMBER_SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_PHONENUMBER = ?";
 
     @Override
@@ -79,15 +78,30 @@ public class Customers_DAO extends System_DAO<Customers, String> {
             return null;
         }
     }
-    
+
     public List<Customers> selectbyPhonenumber(String id) {
-        List<Customers> list = this.selectbySql(SELECT_BY_PHONENUMBER_OR_SQL, id, "%" + id + "%");
+        List<Customers> list = this.selectbySql(SELECT_BY_PHONENUMBER_OR_NAME_SQL, id, "%" + id + "%");
         if (list.isEmpty()) {
             return null;
         } else {
             return list;
         }
     }
-    
-    
+
+    public Customers selectbyIDCus(String id) {
+        List<Customers> list = this.selectbySql(SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
+    }
+    public Customers selectbyPhonenumberForInvoice(String id) {
+        List<Customers> list = this.selectbySql(SELECT_BY_PHONENUMBER_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
+    }
 }

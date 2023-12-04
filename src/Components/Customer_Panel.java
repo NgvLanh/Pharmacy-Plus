@@ -4,6 +4,7 @@ import Classes.Customers;
 import DAO.Customers_DAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -440,12 +441,18 @@ public class Customer_Panel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Trong tên không đúng định dạng");
             return false;
         }
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -16);
+        Date sixteen = calendar.getTime();
 
         if (birthYear == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh");
             return false;
         } else if (birthYear.after(new Date())) {
             JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ");
+            return false;
+        } else if (birthYear.after(sixteen)) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa dủ 16 tuổi");
             return false;
         }
 
@@ -483,7 +490,8 @@ public class Customer_Panel extends javax.swing.JPanel {
 
     private void selectCustomerInfo() {
         int customerId = (int) tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0);
-        Customers customer = customers_DAO.selectbyID(String.valueOf(customerId));
+        System.out.println(customerId);
+        Customers customer = customers_DAO.selectbyIDCus(String.valueOf(customerId));
         if (customer != null) {
             setDataToCustomer(customer);
             jTabbedPane7.setSelectedIndex(0);

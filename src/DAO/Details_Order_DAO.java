@@ -18,10 +18,11 @@ import java.sql.SQLException;
 public class Details_Order_DAO extends System_DAO<Details_Order, String> {
 
     final String INSERT_SQL = "INSERT INTO Details_Order VALUES (?,?,?,?,?)";
-//    final String UPDATE_SQL = "UPDATE ORDERS SET CUSTOMER_NAME = ?,CUSTOMER_YEARBIRTH = ?,EMPLOYEE_ID =? WHERE CUSTOMER_PHONENUMBER = ?";
+    final String UPDATE_SQL = "UPDATE Details_Order SET QUANTITY = ? WHERE PRODUCT_NAME LIKE ? AND ORDER_ID = ?";
     final String DELETE_SQL = "DELETE FROM Details_Order WHERE ID = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM Details_Order";
     final String SELECT_BY_ID_SQL = "SELECT * FROM Details_Order WHERE ID = ?";
+    final String SELECT_BY_PRODUCTNAME_SQL = "SELECT * FROM Details_Order WHERE PRODUCT_NAME LIKE ? AND ORDER_ID = ?";
 
     @Override
     public void insert(Details_Order entity) {
@@ -35,7 +36,10 @@ public class Details_Order_DAO extends System_DAO<Details_Order, String> {
 
     @Override
     public void update(Details_Order entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ConnectSQL.update(UPDATE_SQL,
+                entity.getQuality(),
+                entity.getNameDetails(),
+                entity.getIDOders());
     }
 
     @Override
@@ -48,7 +52,7 @@ public class Details_Order_DAO extends System_DAO<Details_Order, String> {
         return this.selectbySql(SELECT_ALL_SQL);
     }
 
-        @Override
+    @Override
     public Details_Order selectbyID(String id) {
         return this.selectbySql(SELECT_BY_ID_SQL, id).get(0);
     }
@@ -62,7 +66,7 @@ public class Details_Order_DAO extends System_DAO<Details_Order, String> {
                 Details_Order orders = new Details_Order(resultSet.getInt("ID"),
                         resultSet.getInt("Order_Id"),
                         resultSet.getInt("Product_Id"),
-                        resultSet.getInt("Quality"),
+                        resultSet.getInt("Quantity"),
                         resultSet.getString("Product_name"),
                         resultSet.getFloat("Product_price"));
                 list.add(orders);
@@ -73,8 +77,23 @@ public class Details_Order_DAO extends System_DAO<Details_Order, String> {
             return null;
         }
     }
-    
-     public List<Details_Order> selectByIdBill(int id) {
+
+    public List<Details_Order> selectByIdBill(int id) {
         return this.selectbySql("SELECT * FROM DETAILS_ORDER WHERE ORDER_ID = ?", id);
+    }
+
+    public Details_Order selectByProductName(String name, int id) {
+        return this.selectbySql(SELECT_BY_PRODUCTNAME_SQL, name, id).get(0);
+    }
+
+    public void updateTotalMoneyForInvoice(float total, int id) {
+        String SQL = "UPDATE ORDERS SET TOTAL = ? WHERE ID = ?";
+        ConnectSQL.update(SQL, total, id);
+    }
+    
+    public void removeProductFromCart(int productId, int orderId, String name) {
+        String SQL = "DELETE FROM CART WHERE PRODUCT_ID = ? "
+                + "DELETE FROM DETAILS_ORDER WHERE ORDER_ID = ? AND PRODUCT_NAME LIKE ?";
+        ConnectSQL.update(SQL, productId, orderId, name);
     }
 }
