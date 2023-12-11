@@ -2,9 +2,13 @@ package Components;
 
 import Classes.Staff;
 import DAO.Staff_DAO;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import support.Role;
 
 /**
@@ -14,7 +18,6 @@ import support.Role;
 public class Login_Panel extends javax.swing.JPanel {
 
     Staff_DAO staff_DAO = new Staff_DAO();
-    private ActionListener actionListenerToRegister;
     private ActionListener actionListenerToMain;
 
     public Login_Panel() {
@@ -47,6 +50,8 @@ public class Login_Panel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        setBackground(new java.awt.Color(0, 204, 204));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
@@ -67,7 +72,7 @@ public class Login_Panel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -75,24 +80,43 @@ public class Login_Panel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ĐĂNG NHẬP");
 
+        txtUsername.setBackground(new java.awt.Color(0, 204, 204));
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUsername.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtUsername.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtUsernameMouseEntered(evt);
+            }
+        });
 
+        txtPassword.setBackground(new java.awt.Color(0, 204, 204));
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtPasswordMouseEntered(evt);
+            }
+        });
 
         jLabelSignIn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelSignIn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSignIn.setText("Đăng Nhập");
-        jLabelSignIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLabelSignIn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jLabelSignIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSignIn.setOpaque(true);
         jLabelSignIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSignInMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelSignInMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelSignInMouseExited(evt);
+            }
         });
 
+        jCheckBox1.setBackground(new java.awt.Color(0, 204, 204));
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCheckBox1.setText("Hiện mật khẩu");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,16 +138,16 @@ public class Login_Panel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addGap(19, 19, 19))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -131,7 +155,7 @@ public class Login_Panel extends javax.swing.JPanel {
                                 .addComponent(txtPassword)
                                 .addComponent(jLabelSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jCheckBox1))))
-                .addGap(166, 166, 166))
+                .addGap(178, 178, 178))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +191,26 @@ public class Login_Panel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jLabelSignInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSignInMouseEntered
+        jLabelSignIn.setBackground(Color.decode("#0099FF"));
+        jLabelSignIn.setForeground(Color.WHITE);
+        jLabelSignIn.setBorder(new LineBorder(Color.yellow, 1));
+    }//GEN-LAST:event_jLabelSignInMouseEntered
+
+    private void jLabelSignInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSignInMouseExited
+        jLabelSignIn.setBackground(new Color(240, 240, 240));
+        jLabelSignIn.setForeground(Color.BLACK);
+        jLabelSignIn.setBorder(new LineBorder(new Color(240, 240, 240), 1));
+    }//GEN-LAST:event_jLabelSignInMouseExited
+
+    private void txtUsernameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameMouseEntered
+        alertLine(txtUsername, Color.black);
+    }//GEN-LAST:event_txtUsernameMouseEntered
+
+    private void txtPasswordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseEntered
+        alertLine(txtPassword, Color.black);
+    }//GEN-LAST:event_txtPasswordMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
@@ -181,11 +225,6 @@ public class Login_Panel extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    // Lanh -- switch to registerr
-    public void addActionListenerToRegister(ActionListener actionListener) {
-        this.actionListenerToRegister = actionListener;
-    }
-
     public void addActionListenerToMain(ActionListener actionListener) {
         this.actionListenerToMain = actionListener;
     }
@@ -194,10 +233,11 @@ public class Login_Panel extends javax.swing.JPanel {
     private boolean isEmpty() {
         String userName = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword()).trim();
-        if (userName.isEmpty()) {
+        if (userName.isEmpty()) {alertLine(txtUsername, Color.red);
             JOptionPane.showMessageDialog(this, "Không để trống tên đăng nhập");
             return false;
         } else if (password.isEmpty()) {
+            alertLine(txtPassword, Color.red);
             JOptionPane.showMessageDialog(this, "Không để trống mật khẩu");
             return false;
         }
@@ -210,8 +250,10 @@ public class Login_Panel extends javax.swing.JPanel {
         if (isEmpty()) {
             Staff employee = staff_DAO.selectbyID(userName);
             if (employee == null || !employee.getIDEmpl().equalsIgnoreCase(userName)) {
+                alertLine(txtUsername, Color.red);
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập không đúng");
             } else if (!employee.getPassword().equalsIgnoreCase(password)) {
+                alertLine(txtPassword, Color.red);
                 JOptionPane.showMessageDialog(this, "Mật khẩu không đúng");
             } else {
                 Role.user = employee;
@@ -221,5 +263,9 @@ public class Login_Panel extends javax.swing.JPanel {
             }
 
         }
+    }
+
+    private void alertLine(JTextField textField, Color color) {
+        textField.setBorder(new MatteBorder(0, 0, 1, 0, color));
     }
 }

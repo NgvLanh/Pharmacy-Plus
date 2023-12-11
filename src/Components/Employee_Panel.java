@@ -193,7 +193,7 @@ public class Employee_Panel extends javax.swing.JPanel {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(212, 212, 212)
                         .addComponent(jLabel14)))
-                .addContainerGap(446, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +305,7 @@ public class Employee_Panel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtSearch)
                         .addGap(18, 18, 18)
@@ -326,6 +326,7 @@ public class Employee_Panel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Danh sách", jPanel1);
 
+        jPanel6.setBackground(new java.awt.Color(0, 204, 204));
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -353,7 +354,7 @@ public class Employee_Panel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,6 +606,10 @@ public class Employee_Panel extends javax.swing.JPanel {
         if (Role.Manager()) {
             if (validateData()) {
                 String empId = txtEmployeeId.getText().trim();
+                if (empId.isEmpty()) {
+                 JOptionPane.showMessageDialog(this, "Nhân viên này chưa có trong danh sách nên không thể cập nhật");
+                 return;
+            }
                 Staff emp = staff_DAO.selectbyID(empId);
                 if (emp != null) {
                     try {

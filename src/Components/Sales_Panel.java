@@ -8,12 +8,15 @@ import DAO.Customers_DAO;
 import DAO.Details_Order_DAO;
 import DAO.Orders_DAO;
 import DAO.Products_DAO;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import support.Role;
@@ -367,7 +370,7 @@ public class Sales_Panel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setText("Quản lý bán sản phẩm __________________");
@@ -466,7 +469,7 @@ public class Sales_Panel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAdd))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCustomer_PhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -498,11 +501,11 @@ public class Sales_Panel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hoá đơn", "Mã sản phẩm", "Tên sản phẩm", "Giá", "Số lượng", "Tổng tiền"
+                "Mã hoá đơn", "Tên sản phẩm", "Giá", "Số lượng", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -518,7 +521,6 @@ public class Sales_Panel extends javax.swing.JPanel {
             tblDetails.getColumnModel().getColumn(2).setResizable(false);
             tblDetails.getColumnModel().getColumn(3).setResizable(false);
             tblDetails.getColumnModel().getColumn(4).setResizable(false);
-            tblDetails.getColumnModel().getColumn(5).setResizable(false);
         }
         tblDetails.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Adding 1
 
@@ -537,7 +539,7 @@ public class Sales_Panel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -590,7 +592,7 @@ public class Sales_Panel extends javax.swing.JPanel {
             tblHistoryInvoice.getColumnModel().getColumn(3).setResizable(false);
             tblHistoryInvoice.getColumnModel().getColumn(4).setResizable(false);
         }
-        tblOrđer.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Adding 1
+        tblHistoryInvoice.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Adding 1
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("SDT Khách hàng");
@@ -612,9 +614,9 @@ public class Sales_Panel extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCustomer_PhoneNumber_SearchHistoryInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -685,6 +687,9 @@ public class Sales_Panel extends javax.swing.JPanel {
 
     private void btnPrintInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintInvoiceActionPerformed
         printInvoice();
+        Statistics_Panel statistics_Panel = new Statistics_Panel();
+        statistics_Panel.fillTableStatistics();
+        statistics_Panel.fillTableByMonth();
     }//GEN-LAST:event_btnPrintInvoiceActionPerformed
 
     private void miRemoveProductFromInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveProductFromInvoiceActionPerformed
@@ -888,7 +893,7 @@ public class Sales_Panel extends javax.swing.JPanel {
 
         if (details_Orders != null) {
             for (Details_Order details_Order : details_Orders) {
-                Object[] row = {details_Order.getIDOders(), details_Order.getIDProduct(),
+                Object[] row = {details_Order.getIDOders(),
                     details_Order.getNameDetails(),
                     new DecimalFormat("###,###đ").format(details_Order.getPriceDetails()),
                     details_Order.getQuality(),
@@ -918,10 +923,14 @@ public class Sales_Panel extends javax.swing.JPanel {
             }
 
             while (true) {
-                String cusMoneyString = JOptionPane.showInputDialog("Tổng: " + new DecimalFormat("###,###đ").format(total) + "\nNhập số tiền khách đưa");
+                String cusMoneyString = JOptionPane.showInputDialog(this, "Tổng hoá đơn: "
+                        + new DecimalFormat("###,###đ").format(total),
+                        "Thanh toán", JOptionPane.PLAIN_MESSAGE);
                 if (cusMoneyString == null) {
+                    total = 0;
                     return;
                 }
+
                 try {
                     cusMoney = Float.parseFloat(cusMoneyString);
                     if (cusMoney < total) {
@@ -952,10 +961,16 @@ public class Sales_Panel extends javax.swing.JPanel {
 
     private void removeProductFromInvoice() {
         try {
-            int productId = (int) tblDetails.getValueAt(tblDetails.getSelectedRow(), 1);
             int orderId = (int) tblDetails.getValueAt(tblDetails.getSelectedRow(), 0);
-            String productName = (String) tblDetails.getValueAt(tblDetails.getSelectedRow(), 2);
-            details_Order_DAO.removeProductFromCart(productId, orderId, productName);
+            String productName = (String) tblDetails.getValueAt(tblDetails.getSelectedRow(), 1);
+            List<Products> productId = products_DAO.selectCart(productName);
+            if (productId.size() > 1) {
+                for (int i = 0; i < productId.size(); i++) {
+                    details_Order_DAO.removeProductFromCart(productId.get(i).getIDPro(), orderId, productName);
+
+                }
+            }
+            details_Order_DAO.removeProductFromCart(productId.get(0).getIDPro(), orderId, productName);
             upLoadDataAffterAddInvoice();
             fillTableInvoice();
         } catch (Exception e) {

@@ -96,4 +96,5 @@ public class Details_Order_DAO extends System_DAO<Details_Order, String> {
                 + "DELETE FROM DETAILS_ORDER WHERE ORDER_ID = ? AND PRODUCT_NAME LIKE ?";
         ConnectSQL.update(SQL, productId, orderId, name);
     }
+    
 }

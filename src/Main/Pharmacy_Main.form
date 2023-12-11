@@ -7,6 +7,7 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -29,10 +30,10 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Component class="Components.Sales_Panel" name="sales_Panel">
+    <Component class="Components.Supplier_Panel" name="supplier_Panel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="0" width="-1" height="600"/>
+          <AbsoluteConstraints x="210" y="0" width="1010" height="600"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -43,38 +44,55 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Components.Customer_Panel" name="customer_Panel">
+    <Component class="Components.Statistics_Panel" name="statistics_Panel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="0" width="-1" height="600"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="Components.Login_Panel" name="login_Panel">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="-1" height="600"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="Components.Employee_Panel" name="employee_Panel">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="0" width="-1" height="600"/>
+          <AbsoluteConstraints x="210" y="0" width="1010" height="600"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="Components.Products_Panel" name="products_Panel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="0" width="-1" height="600"/>
+          <AbsoluteConstraints x="210" y="0" width="1010" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Components.Statistics_Panel" name="statistics_Panel">
+    <Component class="Components.Sales_Panel" name="sales_Panel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="0" width="-1" height="600"/>
+          <AbsoluteConstraints x="210" y="0" width="1010" height="610"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="Components.Customer_Panel" name="customer_Panel">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="210" y="0" width="1010" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="Components.Employee_Panel" name="employee_Panel">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="210" y="0" width="1010" height="590"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="Components.Login_Panel" name="login_Panel">
+      <Properties>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 600]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 600]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="0" y="0" width="1220" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

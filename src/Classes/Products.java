@@ -4,6 +4,8 @@
  */
 package Classes;
 
+import java.util.Date;
+
 /**
 
  @author nguye
@@ -11,20 +13,22 @@ package Classes;
 public class Products {
 
     public int IDPro;
-    public String namePro, Image, Details, Supplier, IDEmpl;
+    public String namePro, Image, type, Supplier, IDEmpl;
     public float price;
-
-    public Products(int IDPro, String IDEmpl, String namePro, String Image, String Details, String Supplier, float price) {
-        this.IDPro = IDPro;
-        this.IDEmpl = IDEmpl;
-        this.namePro = namePro;
-        this.Image = Image;
-        this.Details = Details;
-        this.Supplier = Supplier;
-        this.price = price;
-    }
+    public Date date;
 
     public Products() {
+    }
+
+    public Products(int IDPro, String namePro, String Image, String type, String Supplier, String IDEmpl, float price, Date date) {
+        this.IDPro = IDPro;
+        this.namePro = namePro;
+        this.Image = Image;
+        this.type = type;
+        this.Supplier = Supplier;
+        this.IDEmpl = IDEmpl;
+        this.price = price;
+        this.date = date;
     }
 
     public int getIDPro() {
@@ -33,14 +37,6 @@ public class Products {
 
     public void setIDPro(int IDPro) {
         this.IDPro = IDPro;
-    }
-
-    public String getIDEmpl() {
-        return IDEmpl;
-    }
-
-    public void setIDEmpl(String IDEmpl) {
-        this.IDEmpl = IDEmpl;
     }
 
     public String getNamePro() {
@@ -59,12 +55,12 @@ public class Products {
         this.Image = Image;
     }
 
-    public String getDetails() {
-        return Details;
+    public String getType() {
+        return type;
     }
 
-    public void setDetails(String Details) {
-        this.Details = Details;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSupplier() {
@@ -75,6 +71,14 @@ public class Products {
         this.Supplier = Supplier;
     }
 
+    public String getIDEmpl() {
+        return IDEmpl;
+    }
+
+    public void setIDEmpl(String IDEmpl) {
+        this.IDEmpl = IDEmpl;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -82,5 +86,15 @@ public class Products {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    
 
 }

@@ -38,8 +38,8 @@ public class DoubleBarChart extends JFrame {
             barRenderer.setItemMargin(0.1); // Set gap between the bars
             barRenderer.setDrawBarOutline(false);
             barRenderer.setBasePaint(Color.BLACK); // Set outline color
-            GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.BLUE, 0.0f, 0.0f, Color.BLUE.darker());
-            GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.RED, 0.0f, 0.0f, Color.RED.darker());
+            GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.decode("#2BAEFD"), 0.0f, 0.0f, Color.decode("#2BAEFD").darker());
+            GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.decode("#E93509"), 0.0f, 0.0f, Color.decode("#E93509").darker());
 
             barRenderer.setSeriesPaint(0, gp0);
             barRenderer.setSeriesPaint(1, gp1);

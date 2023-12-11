@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Products_DAO extends System_DAO<Products, String> {
 
-    final String INSERT_SQL = "INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?, ?)";
-    final String UPDATE_SQL = "UPDATE PRODUCTS SET PRODUCT_NAME = ? ,PRODUCT_PRICE = ?,PRODUCT_DETAILS = ?,  SUPPLIER_ID = ?, EMPLOYEE_ID = ? ,PRODUCT_IMAGE = ? WHERE PRODUCT_ID = ?";
+    final String INSERT_SQL = "INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?, ?, ?)";
+    final String UPDATE_SQL = "UPDATE PRODUCTS SET PRODUCT_NAME = ? ,PRODUCT_PRICE = ?,PRODUCT_TYPE = ?,  SUPPLIER_ID = ?, EMPLOYEE_ID = ? ,PRODUCT_IMAGE = ? WHERE PRODUCT_ID = ?";
     final String DELETE_SQL = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM PRODUCTS";
     final String SELECT_BY_ID_SQL = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?";
@@ -25,9 +25,10 @@ public class Products_DAO extends System_DAO<Products, String> {
                 entity.getNamePro(),
                 entity.getPrice(),
                 entity.getImage(),
-                entity.getDetails(),
-                entity.getSupplier(),
-                entity.getIDEmpl()
+                entity.getType(),
+                entity.getDate(),
+                entity.getIDEmpl(),
+                entity.getSupplier()
         );
     }
 
@@ -36,7 +37,7 @@ public class Products_DAO extends System_DAO<Products, String> {
         ConnectSQL.update(UPDATE_SQL,
                 entity.getNamePro(),
                 entity.getPrice(),
-                entity.getDetails(),
+                entity.getType(),
                 entity.getSupplier(),
                 entity.getIDEmpl(),
                 entity.getImage(),
@@ -75,7 +76,8 @@ public class Products_DAO extends System_DAO<Products, String> {
                 entity.setNamePro(rs.getString("Product_name"));
                 entity.setPrice(rs.getFloat("Product_price"));
                 entity.setImage(rs.getString("Product_image"));
-                entity.setDetails(rs.getString("Product_details"));
+                entity.setType(rs.getString("Product_type"));
+                entity.setDate(rs.getDate("Product_inputDate"));
                 entity.setSupplier(rs.getString("Supplier_id"));
                 entity.setIDEmpl(rs.getString("Employee_id"));
                 list.add(entity);
@@ -97,24 +99,63 @@ public class Products_DAO extends System_DAO<Products, String> {
     }
 
     public void insertTempTable(Products entity) {
-        String SQL = "INSERT INTO CART VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO CART VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         ConnectSQL.update(SQL,
                 entity.getIDPro(),
                 entity.getNamePro(),
                 entity.getPrice(),
                 entity.getImage(),
-                entity.getDetails(),
+                entity.getType(),
+                entity.getDate(),
                 entity.getSupplier(),
                 entity.getIDEmpl()
         );
     }
 
     public List<Products> selectTheOtherProduct() {
-            String SQL = "select * from Products "
-                    + "where Product_Id not in ( "
-                    + "	select Product_Id "
-                    + "	from Cart "
-                    + ")";
+        String SQL = "select * from Products "
+                + "where Product_Id not in ( "
+                + "	select Product_Id "
+                + "	from Cart "
+                + ")";
         return selectbySql(SQL);
+    }
+
+    // new 12/7
+    public List<String> selectAllTypes() {
+        String SQL = "SELECT distinct product_type FROM Pharmacy.dbo.Products;";
+        List<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = ConnectSQL.executeQuery(SQL);
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    // 12/7
+    public List<Integer> selectMonth() {
+        String sql = "SELECT DISTINCT MONTH(Product_inputDate) FROM Products ORDER BY MONTH(Product_inputDate) DESC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet resultSet = ConnectSQL.executeQuery(sql);
+            while (resultSet.next()) {
+                list.add(resultSet.getInt(1));
+            }
+            resultSet.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public List<Products> selectCart(String name) {
+        String SQL = "SELECT * FROM CART WHERE PRODUCT_NAME LIKE ? ";
+        return this.selectbySql(SQL, name);
     }
 }

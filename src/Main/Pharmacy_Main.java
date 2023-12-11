@@ -22,11 +22,11 @@ public class Pharmacy_Main extends javax.swing.JFrame {
         menu.setVisible(false);
         login_Panel.setVisible(true);
 
-//  
         login_Panel.addActionListenerToMain(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 hideAllPanels();
+                menu.clearMenuOption(null);
                 menu.setVisible(true);
                 customer_Panel.txtManv.setText(Role.user.getIDEmpl());
                 products_Panel.txtEmployeeID.setText(Role.user.getIDEmpl());
@@ -42,7 +42,7 @@ public class Pharmacy_Main extends javax.swing.JFrame {
 
             }
         });
-//        // Menu Products switch
+        // Menu switch
         menu.addActionListener((e) -> {
             int panel = menu.panelNumber;
             switch (panel) {
@@ -68,6 +68,10 @@ public class Pharmacy_Main extends javax.swing.JFrame {
                 }
                 case 6 -> {
                     hideAllPanels();
+                    supplier_Panel.setVisible(true);
+                }
+                case 7 -> {
+                    hideAllPanels();
                     menu.setVisible(false);
                     login_Panel.setVisible(true);
                 }
@@ -79,25 +83,33 @@ public class Pharmacy_Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sales_Panel = new Components.Sales_Panel();
+        supplier_Panel = new Components.Supplier_Panel();
         menu = new Components.Menu();
-        customer_Panel = new Components.Customer_Panel();
-        login_Panel = new Components.Login_Panel();
-        employee_Panel = new Components.Employee_Panel();
-        products_Panel = new Components.Products_Panel();
         statistics_Panel = new Components.Statistics_Panel();
+        products_Panel = new Components.Products_Panel();
+        sales_Panel = new Components.Sales_Panel();
+        customer_Panel = new Components.Customer_Panel();
+        employee_Panel = new Components.Employee_Panel();
+        login_Panel = new Components.Login_Panel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pharmacy Plus");
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(sales_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 600));
+        getContentPane().add(supplier_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        getContentPane().add(customer_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 600));
-        getContentPane().add(login_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
-        getContentPane().add(employee_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 600));
-        getContentPane().add(products_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 600));
-        getContentPane().add(statistics_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 600));
+        getContentPane().add(statistics_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
+        getContentPane().add(products_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, -1));
+        getContentPane().add(sales_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 610));
+        getContentPane().add(customer_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, -1));
+        getContentPane().add(employee_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 590));
+
+        login_Panel.setAlignmentX(0.0F);
+        login_Panel.setAlignmentY(0.0F);
+        login_Panel.setMaximumSize(new java.awt.Dimension(1200, 600));
+        login_Panel.setMinimumSize(new java.awt.Dimension(1200, 600));
+        getContentPane().add(login_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -146,6 +158,7 @@ public class Pharmacy_Main extends javax.swing.JFrame {
     private Components.Products_Panel products_Panel;
     private Components.Sales_Panel sales_Panel;
     private Components.Statistics_Panel statistics_Panel;
+    private Components.Supplier_Panel supplier_Panel;
     // End of variables declaration//GEN-END:variables
 
     // Lanh -- Hide all panels
@@ -155,7 +168,8 @@ public class Pharmacy_Main extends javax.swing.JFrame {
             products_Panel,
             customer_Panel,
             sales_Panel,
-            statistics_Panel};
+            statistics_Panel,
+            supplier_Panel};
 
         for (JPanel panel : panels) {
             panel.setVisible(false);
