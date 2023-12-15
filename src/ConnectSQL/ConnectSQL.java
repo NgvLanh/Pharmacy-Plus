@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ConnectSQL;
 
 import java.sql.Connection;
@@ -33,9 +30,9 @@ public class ConnectSQL {
         Connection conn = DriverManager.getConnection(dburl, username, password);
         PreparedStatement pstmt = null;
         if (sql.trim().startsWith("{")) {
-            pstmt = conn.prepareCall(sql); //proc
+            pstmt = conn.prepareCall(sql); // proc
         } else {
-            pstmt = conn.prepareStatement(sql); //SQL
+            pstmt = conn.prepareStatement(sql); // SQL
         }
         for (int i = 0; i < args.length; i++) {
             pstmt.setObject(i + 1, args[i]);

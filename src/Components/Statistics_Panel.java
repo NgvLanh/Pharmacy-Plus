@@ -21,8 +21,8 @@ public class Statistics_Panel extends javax.swing.JPanel {
 
     public Statistics_Panel() {
         initComponents();
-        fillCombobox();
-        fillCombobox2();
+        fillComboboxRevenue();
+        fillComboboxRevenueProduct();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +38,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
         tblRevenue = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxRevenue = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         lblSumRevence = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -47,7 +47,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
         tblRevenue1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxProduct = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         lblSumRevence1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -117,15 +117,12 @@ public class Statistics_Panel extends javax.swing.JPanel {
             tblRevenue.getColumnModel().getColumn(2).setPreferredWidth(10);
             tblRevenue.getColumnModel().getColumn(3).setResizable(false);
             tblRevenue.getColumnModel().getColumn(3).setPreferredWidth(10);
-            tblRevenue.getColumnModel().getColumn(3).setHeaderValue("Số lượng");
             tblRevenue.getColumnModel().getColumn(4).setResizable(false);
             tblRevenue.getColumnModel().getColumn(4).setPreferredWidth(10);
-            tblRevenue.getColumnModel().getColumn(4).setHeaderValue("Mã sản phẩm");
             tblRevenue.getColumnModel().getColumn(5).setResizable(false);
             tblRevenue.getColumnModel().getColumn(5).setPreferredWidth(10);
             tblRevenue.getColumnModel().getColumn(6).setResizable(false);
             tblRevenue.getColumnModel().getColumn(6).setPreferredWidth(10);
-            tblRevenue.getColumnModel().getColumn(6).setHeaderValue("Mã khách hàng");
         }
         tblRevenue.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Adding 1
 
@@ -135,11 +132,11 @@ public class Statistics_Panel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Thống kê theo");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setToolTipText("");
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        cbxRevenue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbxRevenue.setToolTipText("");
+        cbxRevenue.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                cbxRevenueItemStateChanged(evt);
             }
         });
 
@@ -151,7 +148,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxRevenue, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -159,7 +156,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -259,10 +256,10 @@ public class Statistics_Panel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Thống kê theo");
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+        cbxProduct.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbxProduct.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                cbxProductItemStateChanged(evt);
             }
         });
 
@@ -274,7 +271,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -282,7 +279,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -369,18 +366,18 @@ public class Statistics_Panel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+    private void cbxRevenueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxRevenueItemStateChanged
         fillTableByMonth();
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_cbxRevenueItemStateChanged
 
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+    private void cbxProductItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxProductItemStateChanged
         fillTableProductByMonth();
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+    }//GEN-LAST:event_cbxProductItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cbxProduct;
+    private javax.swing.JComboBox<String> cbxRevenue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -413,8 +410,8 @@ public class Statistics_Panel extends javax.swing.JPanel {
         }
     }
 
-    public void fillCombobox() {
-        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) jComboBox1.getModel();
+    public void fillComboboxRevenue() {
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) cbxRevenue.getModel();
         comboBoxModel.removeAllElements();
         List<Integer> i = orders_DAO.selectMonth();
         for (Integer z : i) {
@@ -426,14 +423,17 @@ public class Statistics_Panel extends javax.swing.JPanel {
     public void fillTableByMonth() {
         DefaultTableModel tableModel = (DefaultTableModel) tblRevenue.getModel();
         tableModel.setRowCount(0);
-        String monthString = jComboBox1.getSelectedItem().toString();
-        if (monthString != null) {
-            var splipString = monthString.split(" ");
-            int month = Integer.parseInt(splipString[1]);
-            List<Object[]> list = statistics_DAO.getRevenueByMonth(month);
-            for (Object[] objects : list) {
-                tableModel.addRow(objects);
+        try {
+            String monthString = cbxRevenue.getSelectedItem().toString();
+            if (monthString != null) {
+                var splipString = monthString.split(" ");
+                int month = Integer.parseInt(splipString[1]);
+                List<Object[]> list = statistics_DAO.getRevenueByMonth(month);
+                for (Object[] objects : list) {
+                    tableModel.addRow(objects);
+                }
             }
+        } catch (Exception e) {
         }
         showSumRevenue();
     }
@@ -441,7 +441,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
     private void showSumRevenue() {
         int rowCheck = tblRevenue.getRowCount();
         if (rowCheck > 0) {
-            String monthString = jComboBox1.getSelectedItem().toString();
+            String monthString = cbxRevenue.getSelectedItem().toString();
             if (monthString != null) {
                 var splipString = monthString.split(" ");
                 int month = Integer.parseInt(splipString[1]);
@@ -452,8 +452,8 @@ public class Statistics_Panel extends javax.swing.JPanel {
     }
 
     //
-    public void fillCombobox2() {
-        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) jComboBox2.getModel();
+    public void fillComboboxRevenueProduct() {
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) cbxProduct.getModel();
         comboBoxModel.removeAllElements();
         List<Integer> i = products_DAO.selectMonth();
         for (Integer z : i) {
@@ -465,14 +465,13 @@ public class Statistics_Panel extends javax.swing.JPanel {
     public void fillTableProductByMonth() {
         DefaultTableModel tableModel = (DefaultTableModel) tblRevenue1.getModel();
         tableModel.setRowCount(0);
-        String monthString = jComboBox2.getSelectedItem().toString();
+        String monthString = cbxProduct.getSelectedItem().toString();
         if (monthString != null) {
             var splipString = monthString.split(" ");
             int month = Integer.parseInt(splipString[1]);
             List<Object[]> list = statistics_DAO.getProductPriceByMonth(month);
             for (Object[] objects : list) {
                 tableModel.addRow(objects);
-                System.out.println(objects[1]);
             }
         }
         showSumRevenueProduct();
@@ -481,7 +480,7 @@ public class Statistics_Panel extends javax.swing.JPanel {
     private void showSumRevenueProduct() {
         int rowCheck = tblRevenue1.getRowCount();
         if (rowCheck > 0) {
-            String monthString = jComboBox2.getSelectedItem().toString();
+            String monthString = cbxProduct.getSelectedItem().toString();
             if (monthString != null) {
                 var splipString = monthString.split(" ");
                 int month = Integer.parseInt(splipString[1]);

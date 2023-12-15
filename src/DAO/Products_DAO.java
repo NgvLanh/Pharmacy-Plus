@@ -16,7 +16,11 @@ public class Products_DAO extends System_DAO<Products, String> {
     final String INSERT_SQL = "INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?, ?, ?)";
     final String UPDATE_SQL = "UPDATE PRODUCTS SET PRODUCT_NAME = ? ,PRODUCT_PRICE = ?,PRODUCT_TYPE = ?,  SUPPLIER_ID = ?, EMPLOYEE_ID = ? ,PRODUCT_IMAGE = ? WHERE PRODUCT_ID = ?";
     final String DELETE_SQL = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
-    final String SELECT_ALL_SQL = "SELECT * FROM PRODUCTS";
+    final String SELECT_ALL_SQL = "SELECT * FROM PRODUCTS "
+                + "WHERE PRODUCT_ID NOT IN ( "
+                + "	SELECT PRODUCT_ID "
+                + "	FROM CART "
+                + ")";
     final String SELECT_BY_ID_SQL = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
     @Override

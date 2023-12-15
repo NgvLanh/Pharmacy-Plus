@@ -16,7 +16,7 @@ public class Pharmacy_Main extends javax.swing.JFrame {
     /** Creates new form Pharmacy_Main */
     public Pharmacy_Main() {
         initComponents();
-        Image logo = new ImageIcon("src\\Images\\original_logo.png").getImage();
+        Image logo = new ImageIcon(".\\Images\\original_logo.png").getImage();
         this.setIconImage(logo);
         hideAllPanels();
         menu.setVisible(false);
@@ -83,25 +83,24 @@ public class Pharmacy_Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        supplier_Panel = new Components.Supplier_Panel();
         menu = new Components.Menu();
+        sales_Panel = new Components.Sales_Panel();
         statistics_Panel = new Components.Statistics_Panel();
         products_Panel = new Components.Products_Panel();
-        sales_Panel = new Components.Sales_Panel();
         customer_Panel = new Components.Customer_Panel();
         employee_Panel = new Components.Employee_Panel();
         login_Panel = new Components.Login_Panel();
+        supplier_Panel = new Components.Supplier_Panel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pharmacy Plus");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(supplier_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(sales_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
         getContentPane().add(statistics_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
         getContentPane().add(products_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, -1));
-        getContentPane().add(sales_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 610));
         getContentPane().add(customer_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, -1));
         getContentPane().add(employee_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 590));
 
@@ -110,6 +109,7 @@ public class Pharmacy_Main extends javax.swing.JFrame {
         login_Panel.setMaximumSize(new java.awt.Dimension(1200, 600));
         login_Panel.setMinimumSize(new java.awt.Dimension(1200, 600));
         getContentPane().add(login_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, -1));
+        getContentPane().add(supplier_Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 600));
 
         pack();
         setLocationRelativeTo(null);

@@ -19,8 +19,6 @@ public class Menu extends javax.swing.JPanel {
     public Menu() {
         initComponents();
         clearMenuOption(null);
-        jLabelLogo.setSize(186, 92);
-        jLabelLogo.setIcon(resizeLogo("src\\Images\\menu_logo.png"));
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +40,7 @@ public class Menu extends javax.swing.JPanel {
         jLabelLogo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLogo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu_logo2.png"))); // NOI18N
         jLabelLogo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabelLogo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         jLabelLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -136,7 +135,6 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
@@ -144,7 +142,8 @@ public class Menu extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelLogo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(8, 8, 8))
         );
         layout.setVerticalGroup(
@@ -249,13 +248,5 @@ public class Menu extends javax.swing.JPanel {
         if (actionListener != null) {
             actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
         }
-    }
-
-    // Lanh -- Resize logo
-    private ImageIcon resizeLogo(String path) {
-        ImageIcon imageIcon = new ImageIcon(path);
-        Image image = imageIcon.getImage();
-        Image imageResize = image.getScaledInstance(jLabelLogo.getWidth(), jLabelLogo.getHeight() - 10, Image.SCALE_DEFAULT);
-        return new ImageIcon(imageResize);
     }
 }

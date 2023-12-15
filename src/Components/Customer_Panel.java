@@ -269,6 +269,13 @@ public class Customer_Panel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblCustomer);
         tblCustomer.getTableHeader().setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        if (tblCustomer.getColumnModel().getColumnCount() > 0) {
+            tblCustomer.getColumnModel().getColumn(0).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(1).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(2).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(3).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         txtFind.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtFind.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -491,7 +498,6 @@ public class Customer_Panel extends javax.swing.JPanel {
 
     private void selectCustomerInfo() {
         int customerId = (int) tblCustomer.getValueAt(tblCustomer.getSelectedRow(), 0);
-        System.out.println(customerId);
         Customers customer = customers_DAO.selectbyIDCus(String.valueOf(customerId));
         if (customer != null) {
             setDataToCustomer(customer);

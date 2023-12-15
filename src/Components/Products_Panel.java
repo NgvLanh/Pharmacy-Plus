@@ -3,7 +3,6 @@ package Components;
 import Classes.Products;
 import DAO.Products_DAO;
 import DAO.Supply_Dao;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -14,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import support.Role;
 
@@ -123,18 +121,8 @@ public class Products_Panel extends javax.swing.JPanel {
         jLabel7.setText("Mã Nhân Viên :");
 
         txtNamePro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNamePro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtNameProMouseClicked(evt);
-            }
-        });
 
         txtPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPrice.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPriceMouseClicked(evt);
-            }
-        });
 
         txtEmployeeID.setEditable(false);
         txtEmployeeID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -413,12 +401,6 @@ public class Products_Panel extends javax.swing.JPanel {
         insert();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void txtNameProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameProMouseClicked
-    }//GEN-LAST:event_txtNameProMouseClicked
-
-    private void txtPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPriceMouseClicked
-    }//GEN-LAST:event_txtPriceMouseClicked
-
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
         selectEmpployeeInfo();
     }//GEN-LAST:event_tblProductMouseClicked
@@ -588,21 +570,21 @@ public class Products_Panel extends javax.swing.JPanel {
         return product;
     }
 
-    private void setDataToStaff(Products product) {
+    private void setDataToProduct(Products product) {
         txtNamePro.setText(product.getNamePro());
         txtPrice.setText(String.valueOf(product.getPrice()));
         jComboBox1.setSelectedItem(product.getType());
         jComboBox2.setSelectedItem(product.getSupplier());
         txtEmployeeID.setText(product.getIDEmpl());
         txtProID.setText(String.valueOf(product.getIDPro()));
-        lblImage.setIcon(resizeImages("src\\Images\\" + product.getImage()));
+        lblImage.setIcon(resizeImages(".\\Images\\" + product.getImage()));
     }
 
     private void selectEmpployeeInfo() {
         String productID = String.valueOf((int) tblProduct.getValueAt(tblProduct.getSelectedRow(), 0));
         Products product = products_DAO.selectbyID(productID);
         if (product != null) {
-            setDataToStaff(product);
+            setDataToProduct(product);
             tbpArchive.setSelectedIndex(0);
         }
     }
@@ -690,10 +672,10 @@ public class Products_Panel extends javax.swing.JPanel {
     }
 
     private void selectImage() {
-        JFileChooser fileChooser = new JFileChooser("src\\Images");
+        JFileChooser fileChooser = new JFileChooser(".\\Images");
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            lblImage.setIcon(resizeImages("src\\Images\\" + file.getName()));
+            lblImage.setIcon(resizeImages(".\\Images\\" + file.getName()));
             lblImage.setToolTipText(file.getName());
         }
 

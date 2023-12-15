@@ -1,10 +1,11 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
 
-import Classes.Supplier;
+import Classes.Suppliers;
 import ConnectSQL.ConnectSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import java.util.List;
 
  @author ADMIN
  */
-public class Supply_Dao extends System_DAO<Supplier, String> {
+public class Supply_Dao extends System_DAO<Suppliers, String> {
 
     final String INSERT_SQL = "INSERT INTO Suppliers VALUES (?, ?, ?, ?)";
     final String UPDATE_SQL = "UPDATE Suppliers SET Supplier_name = ?, Supplier_phoneNumber = ?,  Supplier_address = ? WHERE Supplier_Id = ?";
@@ -24,7 +25,7 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
     final String SELECT_BY_ID_SQL = "SELECT * FROM Suppliers WHERE Supplier_Id LIKE ?";
 
     @Override
-    public void insert(Supplier entity) {
+    public void insert(Suppliers entity) {
         ConnectSQL.update(INSERT_SQL,
                 entity.getIDSupplier(),
                 entity.getNameSupplierString(),
@@ -33,7 +34,7 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
     }
 
     @Override
-    public void update(Supplier entity) {
+    public void update(Suppliers entity) {
         ConnectSQL.update(UPDATE_SQL,
                 entity.getNameSupplierString(),
                 entity.getPhone(),
@@ -47,8 +48,8 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
     }
 
     @Override
-    public List<Supplier> selectAll() {
-        List<Supplier> list = selectbySql(SELECT_ALL_SQL);
+    public List<Suppliers> selectAll() {
+        List<Suppliers> list = selectbySql(SELECT_ALL_SQL);
         if (list.isEmpty()) {
             return null;
         } else {
@@ -57,8 +58,8 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
     }
 
     @Override
-    public Supplier selectbyID(String id) {
-        List<Supplier> list = selectbySql(SELECT_BY_ID_SQL, id);
+    public Suppliers selectbyID(String id) {
+        List<Suppliers> list = selectbySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
         } else {
@@ -67,12 +68,12 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
     }
 
     @Override
-    protected List<Supplier> selectbySql(String sql, Object... args) {
-        List<Supplier> list = new ArrayList<>();
+    protected List<Suppliers> selectbySql(String sql, Object... args) {
+        List<Suppliers> list = new ArrayList<>();
         try {
             ResultSet rs = ConnectSQL.executeQuery(sql, args);
             while (rs.next()) {
-                Supplier entity = new Supplier();
+                Suppliers entity = new Suppliers();
                 entity.setIDSupplier(rs.getString("Supplier_Id"));
                 entity.setNameSupplierString(rs.getString("Supplier_name"));
                 entity.setAddress(rs.getString("Supplier_address"));
@@ -86,8 +87,8 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
         }
     }
 
-    public Supplier selectbyIDSupplier(String id) {
-        List<Supplier> list = this.selectbySql(SELECT_BY_ID_SQL, id);
+    public Suppliers selectbyIDSupplier(String id) {
+        List<Suppliers> list = this.selectbySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
         } else {
@@ -110,3 +111,4 @@ public class Supply_Dao extends System_DAO<Supplier, String> {
         }
     }
 }
+

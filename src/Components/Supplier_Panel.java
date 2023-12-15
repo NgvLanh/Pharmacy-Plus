@@ -1,6 +1,6 @@
 package Components;
 
-import Classes.Supplier;
+import Classes.Suppliers;
 import DAO.Supply_Dao;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Supplier_Panel extends javax.swing.JPanel {
     Supply_Dao supply_Dao = new Supply_Dao();
 
     /**
-     Creates new form Supplier_Panel
+     Creates new form Suppliers_Panel
      */
     public Supplier_Panel() {
         initComponents();
@@ -221,12 +221,19 @@ public class Supplier_Panel extends javax.swing.JPanel {
             }
         });
         tblSupply.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        tblSupply.setRowHeight(25);
         tblSupply.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSupplyMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tblSupply);
+        if (tblSupply.getColumnModel().getColumnCount() > 0) {
+            tblSupply.getColumnModel().getColumn(0).setResizable(false);
+            tblSupply.getColumnModel().getColumn(1).setResizable(false);
+            tblSupply.getColumnModel().getColumn(2).setResizable(false);
+            tblSupply.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         txtFind.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -302,7 +309,7 @@ public class Supplier_Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClear1ActionPerformed
 
     private void tblSupplyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSupplyMouseClicked
-        selectSupplierInfo();
+        selectSuppliersInfo();
     }//GEN-LAST:event_tblSupplyMouseClicked
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
@@ -336,11 +343,11 @@ public class Supplier_Panel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSupplyID;
     // End of variables declaration//GEN-END:variables
 
-    private void fillDataToTable(List<Supplier> list) {
+    private void fillDataToTable(List<Suppliers> list) {
         DefaultTableModel suplyTabel = (DefaultTableModel) tblSupply.getModel();
         suplyTabel.setRowCount(0);
         if (list != null) {
-            for (Supplier supply : list) {
+            for (Suppliers supply : list) {
                 Object[] row = {supply.getIDSupplier(), supply.getNameSupplierString(),
                     supply.getPhone(), supply.getAddress()};
                 suplyTabel.addRow(row);
@@ -349,14 +356,14 @@ public class Supplier_Panel extends javax.swing.JPanel {
     }
 
     private void upLoadData() {
-        List<Supplier> list = supply_Dao.selectAll();
+        List<Suppliers> list = supply_Dao.selectAll();
         fillDataToTable(list);
     }
 
     private void search() {
         String id = txtFind.getText().trim();
-        Supplier supplier = supply_Dao.selectbyID(id);
-        List<Supplier> list = new ArrayList<>();
+        Suppliers supplier = supply_Dao.selectbyID(id);
+        List<Suppliers> list = new ArrayList<>();
         list.add(supplier);
         fillDataToTable(list);
     }
@@ -397,12 +404,12 @@ public class Supplier_Panel extends javax.swing.JPanel {
         return true;
     }
 
-    private Supplier getDatSupplier() {
+    private Suppliers getDatSuppliers() {
         String supplyName = txtFullName1.getText().trim();
         String phoneNumber = txtPhhoneNumber1.getText().trim();
         String supplyId = txtSupplyID.getText();
         String supplyAddress = txtAddress1.getText().trim();
-        Supplier supply = new Supplier();
+        Suppliers supply = new Suppliers();
         supply.setNameSupplierString(supplyName);
         supply.setPhone(phoneNumber);
         supply.setAddress(supplyAddress);
@@ -410,29 +417,29 @@ public class Supplier_Panel extends javax.swing.JPanel {
         return supply;
     }
 
-    private void setDataToSupplier(Supplier supply) {
+    private void setDataToSuppliers(Suppliers supply) {
         txtSupplyID.setText(supply.getIDSupplier());
         txtFullName1.setText(supply.getNameSupplierString());
         txtPhhoneNumber1.setText(supply.getPhone());
         txtAddress1.setText(supply.getAddress());
     }
 
-    private void selectSupplierInfo() {
+    private void selectSuppliersInfo() {
         String id = (String) tblSupply.getValueAt(tblSupply.getSelectedRow(), 0);
-        Supplier supply = supply_Dao.selectbyIDSupplier(id);
+        Suppliers supply = supply_Dao.selectbyIDSupplier(id);
         if (supply != null) {
-            setDataToSupplier(supply);
+            setDataToSuppliers(supply);
             jTabbedPane7.setSelectedIndex(0);
             txtSupplyID.setEnabled(false);
         }
     }
 
     private boolean duplicate() {
-        List<Supplier> list = supply_Dao.selectAll();
+        List<Suppliers> list = supply_Dao.selectAll();
         String supplierString = txtSupplyID.getText().trim();
         if (!supplierString.isEmpty()) {
             String supplierId = supplierString;
-            for (Supplier supplier : list) {
+            for (Suppliers supplier : list) {
                 if (supplier.getIDSupplier().equalsIgnoreCase(supplierId)) {
                     JOptionPane.showMessageDialog(this, "Mã nhà sản xuất đã tồn tại");
                     return false;
@@ -441,7 +448,7 @@ public class Supplier_Panel extends javax.swing.JPanel {
         }
         String phoneNumber = txtPhhoneNumber1.getText().trim();
         if (!phoneNumber.isEmpty()) {
-            for (Supplier supplier : list) {
+            for (Suppliers supplier : list) {
                 if (supplier.getPhone().equalsIgnoreCase(phoneNumber)) {
                     JOptionPane.showMessageDialog(this, "Số điện thoại nhà sản xuất đã tồn tại");
                     return false;
@@ -455,14 +462,14 @@ public class Supplier_Panel extends javax.swing.JPanel {
         if (Role.Manager()) {
             if (validateData() && duplicate()) {
                 try {
-                    supply_Dao.insert(getDatSupplier());
-                    JOptionPane.showMessageDialog(this, "Thêm nhà sẩn xuất thành công");
+                    supply_Dao.insert(getDatSuppliers());
+                    JOptionPane.showMessageDialog(this, "Thêm nhà sản xuất thành công");
                     upLoadData();
                     clear();
                     jTabbedPane7.setSelectedIndex(1);
                 } catch (RuntimeException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Thêm nhà sẩn xuất thất bại");
+                    JOptionPane.showMessageDialog(this, "Thêm nhà sản xuất thất bại");
                 }
             }
         } else {
@@ -475,19 +482,24 @@ public class Supplier_Panel extends javax.swing.JPanel {
             String supplierId = txtSupplyID.getText().trim();
             if (!supplierId.isEmpty()) {
                 if (validateData()) {
-                    try {
-                        Supplier supplier = getDatSupplier();
-                        supply_Dao.update(supplier);
-                        JOptionPane.showMessageDialog(this, "Cập nhật thông tin nhà sẩn xuất thành công");
-                        clear();
-                        upLoadData();
-                    } catch (RuntimeException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(this, "Cập nhật nhà sẩn xuất thất bại");
+                    Suppliers supplier = supply_Dao.selectbyID(supplierId);
+                    if (supplier != null) {
+                        try {
+                            Suppliers info = getDatSuppliers();
+                            supply_Dao.update(info);
+                            JOptionPane.showMessageDialog(this, "Cập nhật thông tin nhà sản xuất thành công");
+                            clear();
+                            upLoadData();
+                        } catch (RuntimeException e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(this, "Cập nhật nhà sản xuất thất bại");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Dữ liệu không có nhà sản xuất này");
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà sẩn xuất cần cập nhật ở danh sách");
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà sản xuất cần cập nhật ở danh sách");
                 jTabbedPane7.setSelectedIndex(1);
             }
         } else {
@@ -499,19 +511,19 @@ public class Supplier_Panel extends javax.swing.JPanel {
         if (Role.Manager()) {
             String supplierId = txtSupplyID.getText().trim();
             if (!supplierId.isEmpty()) {
-                int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá nhà sẩn xuất này!", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xoá nhà sản xuất này!", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     try {
                         supply_Dao.delete(supplierId);
-                        JOptionPane.showMessageDialog(this, "Xoá nhà sẩn xuất thành công");
+                        JOptionPane.showMessageDialog(this, "Xoá nhà sản xuất thành công");
                         clear();
                         upLoadData();
                     } catch (RuntimeException e) {
-                        JOptionPane.showMessageDialog(this, "Xoá nhà sẩn xuất thất bại do ràng buộc dữ liệu");
+                        JOptionPane.showMessageDialog(this, "Xoá nhà sản xuất thất bại do ràng buộc dữ liệu");
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà sẩn xuất cần xoá ở danh sách");
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà sản xuất cần xoá ở danh sách");
                 jTabbedPane7.setSelectedIndex(1);
             }
         } else {
